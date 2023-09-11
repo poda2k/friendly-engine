@@ -17,6 +17,5 @@ const user = DataBase.define('user' , {
 }) ;
 
 
-module.exprorts = { 
-    user
- }
+module.exports =  user ;
+ 

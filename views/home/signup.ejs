@@ -16,15 +16,25 @@
 						<span class="focus-input100"></span>
 					</div>
 
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email">
+						<input class="input100" type="text" name="email" placeholder="email">
+						<span class="focus-input100"></span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
 						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
                     <br>
                     <div class="wrap-input100 validate-input" data-validate = "Please confirm password">
-						<input class="input100" type="password" name="confirm-pass" placeholder="Confirm Password">
-						<span class="focus-input100"></span>
+						<input class="input100" type="password" name="confirmPASS" placeholder="Confirm Password">
+						<%if(passconfirm === false){%>
+							<span class="focus-input100"><%= massage %></span>
+						<%}%>
 					</div>
+					<%if(passconfirm === false){%>
+							<span class="focus-input100"><%= massage %></span>
+						<%}%>
 
 					<div class="text-right p-t-13 p-b-23">
 						<!-- <span class="txt1">

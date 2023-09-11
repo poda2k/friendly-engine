@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router() ;
 
 const home = require('../controller/homeController');
+const middleware = require('../middleware/authintication');
 
 //GET
 
@@ -14,6 +15,7 @@ router.get('/login' , home.GETlogin) ;
 //POST
 
 router.post('/register', home.POSTsignup) ;
+router.post('/logout' , middleware.valid ,home.postlogout);
 
 //POST
 
