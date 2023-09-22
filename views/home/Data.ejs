@@ -1,0 +1,29 @@
+<%- include('../includes/header.ejs') %>
+  <%- include('../includes/navbar.ejs') %>
+
+    <div class="cont-1">
+      <p>Choose Type of Operation</p>
+    </div>
+
+    <div class="row">
+      <form action="/Operations" method="post">
+        <div class="column">
+          <div class="card">
+              <button value="Mean" name="ops">Mean</button>
+            </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <button value="STD" name="ops">Standard Deviation</button>
+            </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <button value="CHI" name="ops">CHI-Test</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+
+    <%- include('../includes/footer.ejs') %>

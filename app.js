@@ -4,6 +4,7 @@ const connection = require('./models/connection');
 const parser = require('body-parser') ;
 const path = require('path');
 const home = require('./routes/homeRoute');
+const DataRoutes = require('./routes/DataRoutes');
 const Sessions = require('express-session') ;
 const seqSessions = require('express-session-sequelize')(Sessions.Store) ;
 
@@ -29,6 +30,7 @@ app.set('view engine','ejs');
 app.set('Views' , 'views');
 
 app.use(home) ;
+app.use(DataRoutes);
 
 connection.sync()
 .then(result =>{
