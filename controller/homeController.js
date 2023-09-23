@@ -53,7 +53,6 @@ exports.POSTsignup = async(req , res )=>{
             }
             )
          }else{
-            bcrypt.hash(password,12) ;
             const createREC = await user.create({
                 name : name ,
                 password : password ,
@@ -84,6 +83,44 @@ exports.POSTsignup = async(req , res )=>{
             )
     }
    
+
+}
+
+exports.POSTlogin = async(req, res) => {
+
+    const username = req.body.username;
+    const password = req.body.pass ; 
+
+    const userCheck = await user.findOne({
+        where : {
+            name : username
+        }
+    }) ;
+    if(userCheck){
+       const passcheck= await bcrypt.compare(password , userCheck.password) ;
+           
+       if(passcheck){
+                req.session.isloggedin = true ;
+                req.session.name = userCheck.name ;
+                res.render('home/home',{
+                    name: req.session.name ,
+                    pageTitle : 'home' ,
+                    auth:  req.session.isloggedin
+                })
+            }else{
+                res.render('home/login',{
+                    name: req.session.name ,
+                    pageTitle : 'home' ,
+                    auth:  req.session.isloggedin ,
+                    massage:'password isn`t correct'
+                });
+            }
+    }else{
+        console.log("username error"); 
+    }
+    
+    
+
 
 }
 

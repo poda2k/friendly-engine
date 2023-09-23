@@ -16,6 +16,7 @@ router.get('/login' , home.GETlogin) ;
 
 router.post('/register', home.POSTsignup) ;
 router.post('/logout' , middleware.valid ,home.postlogout);
+router.post('/login',home.POSTlogin);
 
 //POST
 
