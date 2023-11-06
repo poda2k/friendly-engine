@@ -3,10 +3,11 @@ const router = express.Router() ;
 
 const home = require('../controller/homeController');
 const middleware = require('../middleware/authintication');
+const passport = require('passport');
 
 //GET
 
-router.get('/', home.GEThome );
+router.get('/',middleware.valid, home.GEThome );
 router.get('/register' ,home.getsignup) ;
 router.get('/login' , home.GETlogin) ;
 
@@ -14,9 +15,9 @@ router.get('/login' , home.GETlogin) ;
 
 //POST
 
-router.post('/register', home.POSTsignup) ;
+router.post('/register' ,home.POSTsignup ) ;
 router.post('/logout' , middleware.valid ,home.postlogout);
-router.post('/login',home.POSTlogin);
+router.post('/login',passport.authenticate('local',{failureRedirect:'/false',successRedirect:'/'}));
 
 //POST
 

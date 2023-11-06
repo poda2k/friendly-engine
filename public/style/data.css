@@ -1,13 +1,13 @@
 .mainclass{
   margin: 250px;
 }
-.row{
-    /* padding: 0px;
+/* .row{
+    padding: 0px;
     margin: 0 -5px;
     display: flex;
     justify-content: center;
-    align-items: center; */
-}
+    align-items: center;
+} */
 
 .column{
     margin: 30px;
@@ -30,4 +30,7 @@
 
 .cont-1 p{
   font-size: 50px;
+}
+table, th, td {
+  border: 1px solid;
 }

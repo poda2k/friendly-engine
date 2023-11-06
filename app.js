@@ -5,8 +5,10 @@ const parser = require('body-parser') ;
 const path = require('path');
 const home = require('./routes/homeRoute');
 const DataRoutes = require('./routes/DataRoutes');
+const passport = require('passport');
 const Sessions = require('express-session') ;
 const seqSessions = require('express-session-sequelize')(Sessions.Store) ;
+require('./models/passport-congif');
 
 
 const user = require('./models/user');
@@ -28,6 +30,9 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(parser.urlencoded({extended:false})) ;
 app.set('view engine','ejs');
 app.set('Views' , 'views');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(home) ;
 app.use(DataRoutes);

@@ -2,7 +2,32 @@
 <%- include('../includes/navbar.ejs') %>
 
 <% if(ops==='Mean'){ %>
+    <form action="/Operations/table" method="post" >
+        <input type="number" name="variables" placeholder="enter number of columns"> 
+        <input type="number" name="rows" placeholder="enter number of rows">
+        <button type="submit">submit</button>
+    </form>
     <p>mean</p>
+    <form method="post" action="/meanValues">
+    <table style="width:100%" >
+   
+        <tr>
+          <% for(let i=0 ; i<col ;i++){ %>
+          <th>Column <%= i+1%></th>
+          <% for(let j=0 ; j<row ;j++){ %>
+            <tr>
+                 <td> <input type="number" name="arrayOfNumbers" placeholder="0" ></td>
+             </tr>
+           <%}%>
+          <%}%>
+        </tr>
+        
+      </table>
+      <button type="submit">Calculate</button>
+    </form>
+
+   
+
 <%}else if(ops==='STD'){%>
     <p>STD</p>
 <%}else if(ops==='CHI'){%>

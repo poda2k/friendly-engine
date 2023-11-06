@@ -2,8 +2,8 @@
 exports.getDataPage = (req,res)=>{
     res.render('home/Data',{
         pageTitle : 'Data' ,
-        name : req.session.name,
-        auth:  req.session.isloggedin
+        name : req.user.name,
+        auth:  req.isAuthenticated()
     });
 }
 
@@ -13,23 +13,81 @@ exports.GetOperationType = (req,res)=>{
     if(value==='Mean'){
         res.render('home/operations',{
             pageTitle : 'Data' ,
-            name : req.session.name,
-            auth:  req.session.isloggedin ,
-            ops : 'Mean'
+            name : req.user.name,
+            auth:  req.isAuthenticated(),
+            ops : 'Mean' ,
+            col : 0
         })
     }else if(value==='STD'){
         res.render('home/operations',{
             pageTitle : 'Data' ,
-            name : req.session.name,
-            auth:  req.session.isloggedin ,
+            name : req.user.name,
+            auth:  req.isAuthenticated() ,
             ops : 'STD'
         })
     }else{
         res.render('home/operations',{
             pageTitle : 'Data' ,
-            name : req.session.name,
-            auth:  req.session.isloggedin ,
+            name : req.user.name,
+            auth:  req.isAuthenticated(),
             ops : 'CHI'
         })
     }
+}
+
+exports.POSTtable = (req,res)=>{
+    const col = req.body.variables;
+    const row = req.body.rows ;
+
+    res.render('home/operations',{
+        ops : 'Mean',
+        col : col ,
+        row : row ,
+        pageTitle : 'operations' ,
+        name : req.user.name,
+        auth:  req.isAuthenticated,
+        mean : 0
+
+    })
+}
+
+exports.postMeanData =  (req,res)=>{
+
+    const numbers = req.body.arrayOfNumbers ;
+
+    const changed = numbers.map(str => parseInt(str, 10));
+    console.log(changed);
+    let mean = getMeanValue(changed);
+    // console.log(numbers)
+    console.log(mean) ;
+    // console.log("testing");
+    res.render('home/mean',{
+        auth:  req.isAuthenticated(),
+        mean : mean,
+        pageTitle : 'operations' ,
+        name : req.user.name,
+        auth:  req.isAuthenticated
+    })
+}
+
+    function getMeanValue(array){
+
+        let sum = 0;
+
+        for(let i=0 ; i<array.length ;i++){
+
+            if(isNaN(array[i])){
+                array[i] = 0;
+                sum += array[i];
+            }else{
+                sum += array[i];
+            }
+        }
+
+        // for(let i=0 ;i<array.length;i++){
+            
+        // }
+
+        return sum/array.length ;
+
 }

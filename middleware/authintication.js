@@ -2,7 +2,7 @@
 
 exports.valid = (req,res,next)=>{
     
-    if(!req.session.isloggedin){
+    if(!req.isAuthenticated()){
        return res.redirect('/login') ;
     }else{
         next();

@@ -2,14 +2,12 @@
     <div class="container-1">
         <ul class="ul-container">
             <il>
-              <a href="/" class="home-link" Style="text-decoration: none; color: white">home</a>  
+              <a href="/" class="home-link" Style="text-decoration: none; color: white">home</a>
             </il>
             <il>
-                <a href="/Data" class="home-link" Style="text-decoration: none; color: white">Data</a>  
+                <a href="/Data" class="home-link" Style="text-decoration: none; color: white">Data</a>
               </il>
-            <il>
-                <a href="/" class="home-link" Style="text-decoration: none; color: white"><%=  name %></a>  
-              </il>
+            
            <%if(!auth){%>
               <il class="login-link">
                <a href="/login" Style="text-decoration: none; color: white"> login </a>
@@ -19,6 +17,9 @@
             </il>
             <%}%>
            <%if(auth){%>
+            <il>
+              <a href="/" class="home-link" Style="text-decoration: none; color: white"><%=  name %></a>
+            </il>
             <il class="login-link">
                 <form method="post" action="/logout">
                     <button type="submit">Logout</button>

@@ -8,11 +8,15 @@ const auth = require('../middleware/authintication');
 
 router.get('/Data', Dataroute.getDataPage) ;
 
+
 //GET
 
 //POST//
 
 router.post('/Operations',auth.valid,Dataroute.GetOperationType) ;
+router.post('/Operations/table',auth.valid,Dataroute.POSTtable);
+router.post("/meanValues",auth.valid,Dataroute.postMeanData);
+router.post("/meanValues",auth.valid,Dataroute.postMeanData);
 
 //POST//
 

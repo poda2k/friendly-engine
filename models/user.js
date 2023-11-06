@@ -14,6 +14,14 @@ const user = DataBase.define('user' , {
     password : {
         type : sequelize.STRING ,
         allowNull : false
+    },
+    hash :{
+        type : sequelize.STRING ,
+        allowNull : false
+    },
+    salt:{
+        type : sequelize.STRING ,
+        allowNull : false
     }
 }) 
 
