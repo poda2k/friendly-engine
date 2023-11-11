@@ -23,19 +23,21 @@ exports.GetOperationType = (req,res)=>{
             pageTitle : 'Data' ,
             name : req.user.name,
             auth:  req.isAuthenticated() ,
-            ops : 'STD'
+            ops : 'STD',
+            col : 0
         })
     }else{
         res.render('home/operations',{
             pageTitle : 'Data' ,
             name : req.user.name,
             auth:  req.isAuthenticated(),
-            ops : 'CHI'
+            ops : 'CHI',
+            col : 0
         })
     }
 }
 
-exports.POSTtable = (req,res)=>{
+exports.POSTmeanTable = (req,res)=>{
     const col = req.body.variables;
     const row = req.body.rows ;
 
@@ -45,8 +47,24 @@ exports.POSTtable = (req,res)=>{
         row : row ,
         pageTitle : 'operations' ,
         name : req.user.name,
-        auth:  req.isAuthenticated,
+        auth:  req.isAuthenticated(),
         mean : 0
+
+    })
+}
+
+exports.POSTstdTable = (req,res)=>{
+    const col = req.body.variables;
+    const row = req.body.rows ;
+
+    res.render('home/operations',{
+        ops : 'STD',
+        col : col ,
+        row : row ,
+        pageTitle : 'operations' ,
+        name : req.user.name,
+        auth:  req.isAuthenticated(),
+        STD : 0
 
     })
 }
@@ -65,10 +83,29 @@ exports.postMeanData =  (req,res)=>{
         auth:  req.isAuthenticated(),
         mean : mean,
         pageTitle : 'operations' ,
-        name : req.user.name,
-        auth:  req.isAuthenticated
+        name : req.user.name
+      
     })
 }
+
+
+exports.postSTDdata = (req,res)=>{
+
+    const numbers = req.body.arrayOfNumbers;
+
+    const changed = numbers.map(str => parseInt(str, 10));
+
+    const STD = getSTD(changed) ;
+
+    res.render('home/STD',{
+        auth:  req.isAuthenticated(),
+        STD : STD,
+        pageTitle : 'operations' ,
+        name : req.user.name
+    })
+
+}
+
 
     function getMeanValue(array){
 
@@ -89,5 +126,20 @@ exports.postMeanData =  (req,res)=>{
         // }
 
         return sum/array.length ;
+
+}
+
+    function getSTD(array){
+
+    var mean =  getMeanValue(array) ;
+    var sumOfSquares = 0 ;
+
+    for(let i=0 ;i<array.length;i++){
+
+        sumOfSquares += Math.pow((array[i]-mean),2) ;
+
+    }
+
+    return Math.sqrt(sumOfSquares/array.length);
 
 }
