@@ -36,7 +36,8 @@ exports.GetOperationType = (req,res)=>{
         })
     }
 }
-
+//                                                          //
+//                             MEAN                         //
 exports.POSTmeanTable = (req,res)=>{
     const col = req.body.variables;
     const row = req.body.rows ;
@@ -53,6 +54,33 @@ exports.POSTmeanTable = (req,res)=>{
     })
 }
 
+
+
+exports.postMeanData =  (req,res)=>{
+
+    const numbers = req.body.arrayOfNumbers ;
+    const r = req.body.r ;
+    const c = req.body.c ;
+
+    console.log(r,c) ;
+    const changed = numbers.map(str => parseInt(str, 10));
+    console.log(changed);
+    let mean = getMeanValue(changed);
+    console.log(numbers);
+    console.log(mean) ;
+    let testarraysum = GetSumOfArrayColumns(changed);
+    console.log(testarraysum); 
+    // console.log("testing");
+    res.render('home/mean',{
+        auth:  req.isAuthenticated(),
+        mean : mean,
+        pageTitle : 'operations' ,
+        name : req.user.name
+      
+    })
+}
+//                                                 //
+//                       STD                       //
 exports.POSTstdTable = (req,res)=>{
     const col = req.body.variables;
     const row = req.body.rows ;
@@ -69,26 +97,6 @@ exports.POSTstdTable = (req,res)=>{
     })
 }
 
-exports.postMeanData =  (req,res)=>{
-
-    const numbers = req.body.arrayOfNumbers ;
-
-    const changed = numbers.map(str => parseInt(str, 10));
-    console.log(changed);
-    let mean = getMeanValue(changed);
-    // console.log(numbers)
-    console.log(mean) ;
-    // console.log("testing");
-    res.render('home/mean',{
-        auth:  req.isAuthenticated(),
-        mean : mean,
-        pageTitle : 'operations' ,
-        name : req.user.name
-      
-    })
-}
-
-
 exports.postSTDdata = (req,res)=>{
 
     const numbers = req.body.arrayOfNumbers;
@@ -100,6 +108,41 @@ exports.postSTDdata = (req,res)=>{
     res.render('home/STD',{
         auth:  req.isAuthenticated(),
         STD : STD,
+        pageTitle : 'operations' ,
+        name : req.user.name
+    })
+
+}
+//                                  //
+//                CHI               //
+
+exports.POSTCHITable = (req,res)=>{
+    const col = req.body.variables;
+    const row = req.body.rows ;
+
+    res.render('home/operations',{
+        ops : 'CHI',
+        col : col ,
+        row : row ,
+        pageTitle : 'operations' ,
+        name : req.user.name,
+        auth:  req.isAuthenticated(),
+        CHI : 0
+
+    })
+}
+exports.postCHIdata = (req,res)=>{
+
+    const numbers = req.body.arrayOfNumbers;
+
+    const changed = numbers.map(str => parseInt(str, 10));
+
+    const CHI = GetCHI(changed) ;
+
+
+    res.render('home/CHI',{
+        auth:  req.isAuthenticated(),
+        CHI : CHI,
         pageTitle : 'operations' ,
         name : req.user.name
     })
@@ -141,5 +184,33 @@ exports.postSTDdata = (req,res)=>{
     }
 
     return Math.sqrt(sumOfSquares/array.length);
+
+}
+
+function GetSumOfArrayColumns(array,c,r){
+
+    let sum =[] ;
+    let counter = 1 ;
+    let indexer = 0;
+  
+    for(let i =0; i<array.length ; i++){
+       sum[indexer] += array[i] ;
+
+       if(counter==r){
+        indexer++ ;
+       }
+    }
+    return sum ;
+}
+
+function GetCHI(Data){
+
+    var mean = getMeanValue(Data);
+
+    var CHI = 0 ;
+
+    for(let i=0 ; i<Data.length ;i++){
+        // CHI += (Data[i]-())
+    }
 
 }

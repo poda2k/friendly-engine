@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router() ;
 
+
 const home = require('../controller/homeController');
 const middleware = require('../middleware/authintication');
 const passport = require('passport');
@@ -8,8 +9,8 @@ const passport = require('passport');
 //GET
 
 router.get('/',middleware.valid, home.GEThome );
-router.get('/register' ,home.getsignup) ;
-router.get('/login' , home.GETlogin) ;
+router.get('/register',middleware.validForLogin ,home.getsignup) ;
+router.get('/login',middleware.validForLogin , home.GETlogin) ;
 
 //GET
 

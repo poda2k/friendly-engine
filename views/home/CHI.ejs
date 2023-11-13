@@ -1,0 +1,18 @@
+<%- include('../includes/header.ejs') %>
+<%- include('../includes/navbar.ejs') %>
+
+
+
+<p style="margin: 100px; background-color: rgb(9, 196, 84); text-align: center; color: black; padding: 30px; border-radius: 30px; font-size: large;"> CHI value is : <%= CHI%> <br>
+    <a href="javascript:void(0);" onclick="goBack()" Style="text-decoration: none; color: rgb(0, 0, 0) ; font-size: medium"> back to dataset </a>
+</p>
+
+<script>
+function goBack() {
+    window.history.go(-1); // Navigate back one page in the browser history
+}
+</script>
+
+
+
+<%- include('../includes/footer.ejs') %>
